@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Module 2 advanced strategies - Social Expert Gains</title>
+    <style>
+        :root {
+            --primary-color: #2563eb;
+            --secondary-color: #1d4ed8;
+            --background-color: #f8fafc;
+            --surface-color: #ffffff;
+            --text-primary: #1e293b;
+            --text-secondary: #64748b;
+            --border-color: #e2e8f0;
+            --shadow-color: rgba(0, 0, 0, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--background-color);
+            color: var(--text-primary);
+            line-height: 1.5;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: row;
+            min-height: 100vh;
+            background: var(--background-color);
+        }
+
+        /* Video Section */
+        .video-section {
+            flex: 2;
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .player-wrapper {
+            position: relative;
+            width: 100%;
+            padding-bottom: 56.25%;
+            background: #000;
+            border-radius: 1rem;
+            overflow: hidden;
+            box-shadow: 0 4px 6px var(--shadow-color);
+        }
+
+        .player-wrapper iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .description {
+            background: var(--surface-color);
+            padding: 1.5rem;
+            border-radius: 1rem;
+            box-shadow: 0 2px 4px var(--shadow-color);
+            height: 300px;
+            overflow-y: auto;
+        }
+
+        .description h2 {
+            color: var(--text-primary);
+            font-size: 1.5rem;
+            margin-bottom: 0.75rem;
+            font-weight: 600;
+        }
+
+        .description p {
+            color: var(--text-secondary);
+            font-size: 1rem;
+            line-height: 1.6;
+            white-space: pre-line;
+        }
+
+        /* Playlist Section */
+        .playlist-section {
+            flex: 1;
+            background: var(--surface-color);
+            border-left: 1px solid var(--border-color);
+            overflow-y: auto;
+            padding: 1.5rem;
+            max-width: 400px;
+        }
+
+        .playlist-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem;
+            border-radius: 1rem;
+            cursor: pointer;
+            margin-bottom: 1rem;
+            background: linear-gradient(to right, #f0f4ff, #ffffff);
+            border: 1px solid #f0f4ff;
+            transition: all 0.3s ease;
+        }
+
+        .playlist-item:hover {
+            background: linear-gradient(to right, #e6ebff, #ffffff);
+            transform: translateX(4px);
+        }
+
+        .playlist-item.active {
+            background: linear-gradient(to right, #e6ebff, #ffffff);
+            border-left: 4px solid var(--primary-color);
+        }
+
+        .playlist-item img {
+            width: 120px;
+            height: 67.5px;
+            border-radius: 0.5rem;
+            object-fit: cover;
+            box-shadow: 0 2px 4px var(--shadow-color);
+        }
+
+        .playlist-item h4 {
+            margin: 0;
+            font-size: 1rem;
+            font-weight: 500;
+            color: var(--text-primary);
+        }
+
+        /* Scrollbar Styles */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--background-color);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--primary-color);
+            border-radius: 4px;
+            border: 2px solid var(--background-color);
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--secondary-color);
+        }
+
+        /* Mobile Responsive Styles */
+        @media (max-width: 1024px) {
+            .container {
+                flex-direction: column;
+            }
+
+            .video-section {
+                padding: 1rem;
+            }
+
+            .playlist-section {
+                max-width: 100%;
+                border-left: none;
+                border-top: 1px solid var(--border-color);
+            }
+
+            .playlist-item {
+                padding: 0.75rem;
+            }
+
+            .playlist-item img {
+                width: 100px;
+                height: 56.25px;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .video-section {
+                padding: 0.5rem;
+            }
+
+            .description {
+                padding: 1rem;
+            }
+
+            .playlist-section {
+                padding: 1rem;
+            }
+
+            .playlist-item {
+                padding: 0.5rem;
+            }
+
+            .playlist-item img {
+                width: 80px;
+                height: 45px;
+            }
+
+            .playlist-item h4 {
+                font-size: 0.875rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="video-section">
+            <div class="player-wrapper">
+                <iframe id="vimeo-player" 
+                        src="https://player.vimeo.com/video/1060245264?title=0&byline=0&portrait=0" 
+                        allow="autoplay; fullscreen" 
+                        allowfullscreen>
+                </iframe>
+            </div>
+            <div class="description" id="video-description">
+                <h2>Welcome</h2>
+                <p>Now that you know the secret tool that can connect you to the largest companies on the stock market...</p>
+            </div>
+        </div>
+        
+        <div class="playlist-section" id="playlist">
+            <div class="playlist-item active">
+                <img src="./class 1_files/thumb.png" alt="Welcome">
+                <div>
+                    <h4>Welcome</h4>
+                </div>
+            </div>
+            <div class="playlist-item">
+                <img src="./class 1_files/thumb.png" alt="Class 1">
+                <div>
+                    <h4>Class 1</h4>
+                </div>
+            </div>
+            <div class="playlist-item">
+                <img src="./class 1_files/thumb.png" alt="Class 2">
+                <div>
+                    <h4>Class 2</h4>
+                </div>
+            </div>
+            <div class="playlist-item">
+                <img src="./class 1_files/thumb.png" alt="class 3">
+                <div>
+                    <h4>class 3</h4>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://player.vimeo.com/api/player.js"></script>
+    <script>
+        const videos = [
+            {
+                id: 1060245264,  // Welcome
+                title: "Welcome",
+                description: `Now that you know the secret tool that can connect you to the largest companies on the stock market, it's time to create your account and access everything in practice! The process is simple, fast, and self-explanatory, but to ensure you have no doubts, follow this step-by-step guide:
+
+                🛠 STEP-BY-STEP TO REGISTER ON THE PLATFORM
+                ✅ Step 1: Click on the link below to access the official platform.
+                🔹LINK: 
+                https://u2.shortink.io
+                // /register?utm_campaign=783665&utm_source=affiliate&utm
+                // _medium=sr&a=Yjap6eHcm10HX5&ac=entregavel2
+
+                ✅ Step 2: On the homepage, you will see the option to create an account. You can choose between:
+                - Creating an account with your email and password
+                - Quickly logging in with Google or Facebook
+
+                ✅ Step 3: After filling in your details, confirm your email. The platform will send a verification link to your email address. Simply open your inbox and click on the link to activate your account.
+
+                ✅ Step 4: Log in with your username and password. Once you're in, you'll see an intuitive and easy-to-navigate interface.
+
+                ✅ Step 5: Initial exploration: Within the platform, you'll be able to view the available assets, check investment returns, and begin to understand how each feature works.
+
+                💡 IMPORTANT TIPS
+                🔹 The process is self-explanatory, so follow the platform instructions and you'll be ready in a few minutes.
+                🔹 If you do not receive the confirmation email, check your spam folder or wait a few minutes and try resending the verification link.
+                🔹 Once your account is active, proceed to the next lesson to learn how to take your first steps and use this tool to profit!
+
+                ⚠️ IMPORTANT!
+                After creating your account, immediately return to our official platform and continue following the instructions. Completing the module in its entirety is essential to ensure profits without risk of loss and to take full advantage of this opportunity in the proper way.
+
+                🎯 Now it's up to you! Click the link, register, and we'll see you in the next lesson!`,
+                thumbnail: "./class 1_files/thumb.png"
+            },
+            {
+                id: 1060245289,  // Class 1 (corrigido)
+                title: "Class 1",
+                description: `Now that you've created your account on the exclusive platform, the next step is to make your first deposit to activate your account and start operating. This process is simple and secure, and I will guide you step-by-step to ensure you do everything correctly.
+                https://www.youtube.com/watch?v=wvgWG8GO4Yk
+
+                🛠 STEP-BY-STEP TO MAKE YOUR DEPOSIT
+                ✅ Step 1: Log in to your account on the platform and go to the Deposit or Add Funds section.
+                ✅ Step 2: Choose the payment method you wish to use. The options generally include:
+                💳 Credit/Debit Card (Visa, Mastercard, etc.)
+                🏦 Bank Transfer
+                🪙 Cryptocurrencies (Bitcoin, USDT, and others)
+                📲 Digital Wallets (Google Pay, Apple Pay, etc.)
+                ✅ Step 3: Select the deposit amount. It is important to check if there is a minimum amount required for account activation and ensure it is within the recommended range for your strategy.
+                ✅ Step 4: Enter your payment details and confirm the transaction. Depending on the chosen method, the confirmation may be instant or take a few minutes.
+                ✅ Step 5: Once confirmed, your balance will be updated within the platform and your account will be officially activated and ready to use.
+
+                💡 IMPORTANT TIPS
+                🔹 If using a credit/debit card, ensure it is enabled for international transactions if necessary.
+                🔹 For cryptocurrency deposits, correctly copy the wallet address and confirm the transaction on the blockchain.
+                🔹 If the balance does not appear immediately, wait a few minutes and check the payment status on the platform.`,
+                thumbnail: "./class 1_files/thumb.png"
+            },
+            {
+                id: 1060245226,  // Class 2 (corrigido)
+                title: "Class 2",
+                description: `Now that you have activated your account and started operating, it is essential to know how to withdraw your earnings quickly and securely.
+                Many people have questions about the withdrawal process, but the truth is that withdrawing your profits is simple and guaranteed, regardless of the amount.I will guide you step- by - step so that you can access your earnings whenever you want, without complications!
+
+                🛠 STEP - BY - STEP TO WITHDRAW YOUR EARNINGS
+                ✅ Step 1: Log in to your account and go to the Withdrawals / Withdrawals section in the main menu.
+                ✅ Step 2: Choose the withdrawal method you wish to use.The options generally include:
+                💳 Credit / Debit Card(Visa, Mastercard, etc.)
+                🏦 Bank Transfer
+                🪙 Cryptocurrencies(Bitcoin, USDT, and others)
+                📲 Digital Wallets(Google Pay, Apple Pay, etc.)
+                ✅ Step 3: Enter the amount you wish to withdraw.There is no minimum withdrawal limit, and you can withdraw whenever you want.
+                ✅ Step 4: Confirm the details of the account / wallet where you wish to receive the withdrawal.If it's a bank withdrawal, ensure that the details are correct to avoid delays.
+                ✅ Step 5: Finalize the withdrawal request and wait for processing.The time it takes for the money to appear in your account may vary depending on the chosen method:
+                ⏳ Cards and banks: It may take from 1 to 5 business days.
+                ⚡ Cryptocurrencies and digital wallets: Generally processed in minutes or a few hours.
+
+                💡 IMPORTANT TIPS
+                🔹 Total security – The withdrawal process is 100 % guaranteed, and you can withdraw your funds whenever you need, regardless of the amount.
+                🔹 Use a reliable method – Always choose a withdrawal option that is secure and convenient for you.
+                🔹 Confirm your details – To avoid any errors or delays, verify your information before finalizing the request.
+                🔹 Monitoring – You can track the status of your withdrawal within the platform to know when the payment is completed.
+
+                ⚠️ DON'T STOP NOW!
+                Now that you know how to withdraw your profits safely, return to our official platform and continue following the instructions.Completing the module in its entirety is essential to maximize your earnings without risk of loss.
+                📌 Click the button below to proceed to the next lesson and learn how to optimize your operations! 🚀`,
+                thumbnail: "./class 1_files/thumb.png"
+            },
+            {
+                id: 1060245247,  // Class 3 (corrigido)
+                title: "class 3",
+                description: `Now that you know how to operate, deposit, and withdraw your profits, it's time to take it a step further and learn how to use Artificial Intelligence (AI) to automatically assess whether a company will rise or fall.
+                    Many people believe that predicting the market requires advanced knowledge, but with the right tool, anyone can make strategic decisions with precision. I'll show you how to do it step-by-step!
+
+                    🛠 STEP-BY-STEP TO USE ARTIFICIAL INTELLIGENCE IN MARKET ANALYSIS
+                    ✅ Step 1: Log in to your account on the platform and navigate to the market analysis or technical indicators area.
+                    ✅ Step 2: Locate the Artificial Intelligence (AI) tool within the platform. This feature may appear as:
+                    🔹 Automatic analyses
+                    🔹 Market forecasts
+                    🔹 AI indicators
+                    ✅ Step 3: Choose the asset you wish to analyze, such as Apple, Amazon, Microsoft, or any other company listed on the stock exchange.
+                    ✅ Step 4: Activate the automatic analysis option and wait while the AI reads the market in real time.
+                    ✅ Step 5: The platform will display whether the asset's trend is upward (rising) or downward (falling), based on various factors such as trading volume, market behavior, and price history.
+                    ✅ Step 6: Follow the AI's recommendations to make your investment decisions! You will see alerts indicating whether it's a good time to buy (bet on an uptrend) or sell (bet on a downtrend).
+
+                    💡 IMPORTANT TIPS
+                    🔹 The AI does all the heavy lifting for you, automatically analyzing market data.
+                    🔹 Combine the AI analysis with your personal strategy to boost your profits.
+                    🔹 You don't need to be an expert! The technology was created to simplify your decisions and increase your chances of success.
+                    🔹 Does AI never make mistakes? No prediction is 100% guaranteed, but the algorithms use millions of data points to offer the best possible analysis.
+
+                    ⚠️ ESSENTIAL FOR YOUR SUCCESS!
+                    Now that you have learned to use the Artificial Intelligence tool to predict the market automatically, return to our official platform and continue following the instructions. Completing the module fully is essential to ensure profits without risk of loss.
+                    📌 Click the button below to proceed to the next lesson and learn how to apply this technology to maximize your gains! 🚀
+
+                    🎁 BONUS LESSON – JOIN THE EXCLUSIVE SOCIAL EXPERT GAINS GROUP
+                    Congratulations on making it this far! Now that you have mastered the main concepts and strategies for operating, we're giving you VIP access to something truly exclusive!
+                    Social Expert Gains has the privilege of offering one of the most advanced Artificial Intelligence technologies in the market, developed with cutting-edge technology from China – a country that currently leads the AI revolution worldwide.
+
+                    📌 Why is this AI so powerful?
+                    The AI we use is not just any tool. If we tried to develop an AI of this level from scratch, the cost would be billions of dollars. However, since our technology is already based in China, we were able to bring it to the public with a much smaller investment.
+                    While the AIs available in the United States are limited to only 20% of quantum processing power, ours operates at 100% capacity, allowing for much greater precision in market forecasts.
+                    And now, you can access all of this within our exclusive Telegram group!`,
+                thumbnail: "./class 1_files/thumb.png"
+            }
+        ];
+
+        const player = new Vimeo.Player('vimeo-player');
+        
+        document.querySelectorAll('.playlist-item').forEach((item, index) => {
+            item.addEventListener('click', () => {
+                if (item.classList.contains('active')) return;
+                
+                document.querySelectorAll('.playlist-item').forEach(el => 
+                    el.classList.remove('active'));
+                item.classList.add('active');
+                
+                const video = videos[index];
+                player.loadVideo(video.id).then(() => {
+                    const description = document.getElementById('video-description');
+                    description.innerHTML = `
+                        <h2>${video.title}</h2>
+                        <p>${video.description}</p>
+                    `;
+                }).catch(error => {
+                    console.error('Erro ao carregar o vídeo:', error);
+                });
+            });
+        });
+    </script>
+</body>
+</html>
