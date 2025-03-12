@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Module 1</title>
+    <style>
+        :root {
+            --primary: #4F46E5;
+            --primary-hover: #4338CA;
+            --background: #f8fafc;
+            --text: #1F2937;
+            --text-secondary: #6B7280;
+            --border: #E5E7EB;
+            --nav-height: 64px;
+            --footer-height: 60px;
+            --background-body: #181818;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scrollbar-width: thin;
+            /* Tamanho "fino" da scrollbar */
+            scrollbar-color: #4F46E5 #f1f1f1;
+            /* thumb e track, respectivamente */
+        }
+
+        /* Se necessário, ajuste o seletor abaixo para não afetar outros elementos da página */
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            background: white;
+            border-radius: 1rem;
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            height: 90vh;
+            margin: 50px auto;
+        }
+
+        .content-wrapper {
+            display: flex;
+            flex: 1;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Sidebar Styling */
+        .sidebar {
+            width: 280px;
+            background: #f8fafc;
+            border-right: 1px solid var(--border);
+            padding: 1.5rem;
+            overflow-y: auto;
+            height: 100%;
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+        }
+
+        .sidebar h3 {
+            color: var(--text);
+            font-size: 1.25rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 2px solid var(--primary);
+            background: #f8fafc;
+            z-index: 1;
+        }
+
+        .sidebar ul {
+            list-style: none;
+        }
+
+        .sidebar ul li {
+            margin-bottom: 0.5rem;
+        }
+
+        .sidebar ul li a {
+            display: flex;
+            align-items: center;
+            padding: 0.75rem 1rem;
+            color: var(--text);
+            text-decoration: none;
+            border-radius: 0.5rem;
+            transition: all 0.2s;
+        }
+
+        .sidebar ul li a:hover {
+            background: #eef2ff;
+            color: var(--primary);
+        }
+
+        /* Main Content Area */
+        .main-content {
+            flex: 1;
+            padding: 2rem;
+            overflow-y: auto;
+            margin-left: 280px;
+            height: 100%;
+        }
+
+        .content {
+            display: none;
+            animation: fadeIn 0.3s ease-in-out;
+        }
+
+        .content.active {
+            display: block;
+        }
+
+        .content h2 {
+            color: var(--text);
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 2px solid var(--primary);
+            background: white;
+            z-index: 1;
+        }
+
+        .video-container {
+            position: relative;
+            width: 100%;
+            margin: 1rem 0;
+        }
+
+        .video-container img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .video-description {
+            margin: 1.5rem 0;
+            line-height: 1.8;
+        }
+
+        /* Navigation Buttons */
+        .navigation-buttons {
+            display: flex;
+            justify-content: space-between;
+            padding: 1rem 2rem;
+            background: #f8fafc;
+            border-top: 1px solid var(--border);
+        }
+
+        .navigation-buttons button {
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 0.5rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        #backButton {
+            background: #f1f5f9;
+            color: var(--text);
+        }
+
+        #backButton:hover {
+            background: #e2e8f0;
+        }
+
+        #nextButton {
+            background: var(--primary);
+            color: white;
+        }
+
+        #nextButton:hover {
+            background: var(--primary-hover);
+        }
+
+        /* Footer */
+        .footer {
+            height: var(--footer-height);
+            background: white;
+            border-top: 1px solid var(--border);
+            padding: 1rem 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .footer a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.875rem;
+            transition: color 0.2s;
+        }
+
+        .footer a:hover {
+            color: var(--primary);
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive Design */
+        @media screen and (max-width: 768px) {
+            .main-content {
+                margin-left: 0;
+                padding: 1rem;
+            }
+
+            .container {
+                height: 700px;
+            }
+
+            .content-wrapper {
+                flex-direction: column;
+            }
+
+            .sidebar {
+                width: 100%;
+                position: relative;
+                height: 250px;
+                border-right: none;
+                border-bottom: 1px solid var(--border);
+            }
+
+            .footer {
+                flex-direction: column;
+                height: auto;
+                gap: 1rem;
+                text-align: center;
+            }
+
+            .footer-links {
+                flex-direction: row;
+                gap: 0.5rem;
+            }
+        }
+    </style>
+<script src="./Module 1_files/player.js.download" async=""></script><script async="" src="./Module 1_files/smartplayer.min.js.download"></script>
+
+<body cz-shortcut-listen="true">
+    <div class="container">
+        <!-- Agrupa main-content e sidebar -->
+        <div class="content-wrapper">
+            <!-- Área principal de conteúdo -->
+            <div class="main-content">
+                <div id="content1" class="content active">
+                    <h2>Lesson 1: Start Your Journey Today with Up to $50,000</h2>
+                    <!-- Keep only one video element - either the smartplayer div or the click image, not both -->
+                    <div id="vid_67d1a4f1637ca05700d25659" style="position: relative; width: 100%; padding: 56.25% 0 0;"> 
+                        <img id="thumb_67d1a4f1637ca05700d25659" src="https://images.converteai.net/0a8b4b97-a0e3-4633-ac8a-9914c0209ef6/players/67d1a4f1637ca05700d25659/thumbnail.jpg" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; display: block;" alt="thumbnail"> <div id="backdrop_67d1a4f1637ca05700d25659" style=" -webkit-backdrop-filter: blur(5px); backdrop-filter: blur(5px); position: absolute; top: 0; height: 100%; width: 100%; "></div> </div> <script type="text/javascript" id="scr_67d1a4f1637ca05700d25659"> var s=document.createElement("script"); s.src="https://scripts.converteai.net/0a8b4b97-a0e3-4633-ac8a-9914c0209ef6/players/67d1a4f1637ca05700d25659/player.js", s.async=!0,document.head.appendChild(s); </script>
+                    
+                    <!-- Remove any duplicate video elements or images that might be here -->
+                    
+                    <hr>
+                    <p class="video-description">
+                        💰 Discover Financial Freedom with Our Exclusive Personal Loan! 🚀<br>
+                        Have you ever imagined starting your operation without investing a single cent? With our
+                        strategic
+                        partnership, you can receive up to $50,000 directly into your account to boost your professional
+                        journey!<br>
+                        🔹 Immediate Capital – Funds released for you to start now, with no initial outlay.<br>
+                        🔹 Simple and Transparent Process – No bureaucracy, no hidden fees, just support for your
+                        growth.<br>
+                        🔹 Bet on Your Potential – We believe in your success and want to facilitate your journey
+                        towards
+                        extraordinary earnings!<br>
+                        🔥 The opportunity is in your hands! If you don't want to take advantage, share it with someone
+                        who
+                        might need it. But if you want to move forward without depleting your capital, click the link,
+                        answer the brief Social Expert Gains questionnaire, and unlock your access to financing!<br>
+                        📌 The future starts now. Don't miss this chance! 💼🚀
+                    </p>
+                </div>
+
+                <div id="content2" class="content">
+                    <h2>Lesson 2: Requesting Your Advance</h2>
+                    <p class="video-description">
+                        🔹 Official Facilitated Loans Session 🔹 <br>
+                        Welcome to our official facilitated loans platform in partnership with our financial company.
+                        Here, you can request up to $50,000 in a simple, quick, and hassle-free manner.
+                        Just select the desired amount in the form below and follow the instructions. In just a few
+                        minutes,
+                        you'll know exactly how much you can request and what the next steps are to obtain your
+                        immediate
+                        capital.<br><br>
+                        💳 No need for an initial investment<br><br>
+                        ⚡ Fast and secure process<br><br>
+                        🔐 Your data protected with 256-bit SSL encryption<br>
+                        Choose the ideal amount and get started right now!
+                    </p>
+                </div>
+
+                <div id="content3" class="content">
+                    <h2>🎯 Take advantage of this opportunity and secure your capital now!</h2>
+                    
+                    <!-- Create a single container for the form -->
+                    <div id="formContainer">
+                        <script type="text/javascript">
+                            var srcURL = 'https://www.rndframe.com/server';
+                            var inputOptions = {
+                                UserID: 'NUCAbWsEew-F2KjwRig_Chm9qvZnm88PQ2YV09-LpSo.',
+                                Style: 'STYLE1',
+                                FormID: 'INSTALLMENT_STEP',
+                                SubID: '',
+                                SubID2: '',
+                                SubID3: '',
+                                Domain: '',
+                                Height: 'AUTO',
+                                StepAmountSelect: 'buttons',
+                                TargetDivID: 'rsForm' // Specify target div
+                            };
+                            
+                            // Load the script only once
+                            if (!window.formScriptLoaded) {
+                                window.formScriptLoaded = true;
+                                var s = document.createElement("script");
+                                s.src = srcURL + '/init.php?vn=' + encodeURIComponent(JSON.stringify(inputOptions));
+                                s.async = true;
+                                document.head.appendChild(s);
+                            }
+                        </script>
+                        <div id="rsForm" style="height:calc(100% - 0px);overflow:auto !important;"></div>
+                    </div>
+                    
+                    <p class="video-description">
+                        After filling out the form, you will be informed of the exact amount you can request and how to
+                        proceed with your credit release.
+                        Our goal is to provide immediate access to the capital you need to boost your professional and
+                        financial journey.<br><br>
+                        📌 Don't waste time! Make your request now and take the first step towards financial
+                        independence.
+                        If you have any questions, our support team is ready to help! 🚀
+                    </p>
+                </div>
+
+                <div id="content4" class="content">
+                    <h2>Lesson 3 - 🎉 Congratulations! You Are One Step Closer to Financial Freedom! 🚀</h2>
+                    <p class="video-description">
+                        You have successfully completed the quiz and are now ready to move on to the next modules
+                        without
+                        having to invest your own capital! This means you can leverage your earnings strategically and
+                        intelligently, making the most of this opportunity.<br><br>
+                        📌 What to do now?<br>
+                        ✅ Go to Module 2 and discover the next steps to boost your journey towards financial freedom.
+                        <br>
+                    </p>
+                </div>
+            </div>
+
+            <!-- Barra lateral com menu -->
+            <div class="sidebar">
+                <h3>Lessons Module</h3>
+                <ul>
+                    <li><a href="#" data-content="content1">Lesson 1</a></li>
+                    <li><a href="#" data-content="content2">Lesson 2</a></li>
+                    <li><a href="#" data-content="content3">Quiz Challenge</a></li>
+                    <li><a href="#" data-content="content4">Lesson 3</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Área dos botões de navegação -->
+        <div class="navigation-buttons">
+            <button id="backButton">Back</button>
+            <button id="nextButton">Next Step</button>
+        </div>
+    </div>
+
+    <script>
+        // Função para mostrar o conteúdo selecionado
+        function showContent(contentId) {
+            const contents = document.querySelectorAll('.content');
+            contents.forEach((content) => {
+                content.classList.remove('active');
+            });
+            document.getElementById(contentId).classList.add('active');
+        }
+
+        // Função para encontrar o índice da div ativa
+        function getActiveIndex() {
+            const contents = Array.from(document.querySelectorAll('.content'));
+            return contents.findIndex(content => content.classList.contains('active'));
+        }
+
+        // Evento para o botão "Next Step"
+        document.getElementById('nextButton').addEventListener('click', () => {
+            const contents = document.querySelectorAll('.content');
+            let activeIndex = getActiveIndex();
+            if (activeIndex < contents.length - 1) {
+                showContent(contents[activeIndex + 1].id);
+            }
+        });
+
+        // Evento para o botão "Back"
+        document.getElementById('backButton').addEventListener('click', () => {
+            const contents = document.querySelectorAll('.content');
+            let activeIndex = getActiveIndex();
+            if (activeIndex > 0) {
+                showContent(contents[activeIndex - 1].id);
+            }
+        });
+    </script>
+
+    <script>
+        // Remove the smartplayer-resume div if it exists
+        document.addEventListener('DOMContentLoaded', function() {
+            const removeResumeDiv = function() {
+                const resumeDiv = document.querySelector('.smartplayer-resume');
+                if (resumeDiv) {
+                    resumeDiv.remove();
+                }
+            };
+            
+            // Try immediately and also after a short delay to catch dynamically added elements
+            removeResumeDiv();
+            setTimeout(removeResumeDiv, 1000);
+            setTimeout(removeResumeDiv, 3000);
+        });
+    </script>
+
+    <script src="module-navigation.js"></script>
+</body></html>
