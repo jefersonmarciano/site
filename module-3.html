@@ -1,7 +1,10 @@
 <!DOCTYPE html>
 <!-- saved from url=(0051)https://socialexpertgains.com/modules/module-3.html -->
-<html lang="pt"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    
+<html lang="pt">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Playlist de Vídeos com Vimeo</title>
     <style>
@@ -101,19 +104,21 @@
             align-items: center;
             gap: 1rem;
             padding: 1rem;
-            border-radius: 0.75rem;
+            border-radius: 1rem;
             cursor: pointer;
+            margin-bottom: 1rem;
+            background: linear-gradient(to right, #f0f4ff, #ffffff);
+            border: 1px solid #f0f4ff;
             transition: all 0.3s ease;
-            margin-bottom: 0.5rem;
         }
 
         .playlist-item:hover {
-            background: rgba(37, 99, 235, 0.05);
+            background: linear-gradient(to right, #e6ebff, #ffffff);
             transform: translateX(4px);
         }
 
         .playlist-item.active {
-            background: rgba(37, 99, 235, 0.1);
+            background: linear-gradient(to right, #e6ebff, #ffffff);
             border-left: 4px solid var(--primary-color);
         }
 
@@ -212,52 +217,24 @@
     <div class="container">
         <div class="video-section">
             <div class="player-wrapper">
-                <iframe id="vimeo-player" src="./module-3_files/1060528161.html" allow="autoplay; fullscreen" allowfullscreen="" data-ready="true"></iframe>
+                <iframe id="vimeo-player" src="https://player.vimeo.com/video/1060528161?title=0&byline=0&portrait=0" allow="autoplay; fullscreen"
+                    allowfullscreen=""></iframe>
             </div>
             <div class="description" id="video-description">
                 <h2>Welcome</h2>
                 <p>Learn how to earn income by watching online videos on an established platform.
 
-                            This course covers account creation, profile setup, video evaluation, earnings tracking, and converting your credits into real rewards.
-    T                       o get started, visit the official website at www.swagbucks.com.</p>
+                    This course covers account creation, profile setup, video evaluation, earnings tracking, and
+                    converting your credits into real rewards.
+                    T o get started, visit the official website at www.swagbucks.com.</p>
             </div>
         </div>
         <div class="playlist-section" id="playlist">
             <!-- Playlist items will be generated via JavaScript -->
-        <div class="playlist-item active">
-                    <img src="./module-3_files/thumb.png" alt="Welcome">
-                    <div>
-                        <h4>Welcome</h4>
-                    </div>
-                </div><div class="playlist-item">
-                    <img src="./module-3_files/thumb.png" alt="Class 1">
-                    <div>
-                        <h4>Class 1</h4>
-                    </div>
-                </div><div class="playlist-item">
-                    <img src="./module-3_files/thumb.png" alt="Class 2">
-                    <div>
-                        <h4>Class 2</h4>
-                    </div>
-                </div><div class="playlist-item">
-                    <img src="./module-3_files/thumb.png" alt="class 3">
-                    <div>
-                        <h4>class 3</h4>
-                    </div>
-                </div><div class="playlist-item">
-                    <img src="./module-3_files/thumb.png" alt="class 4">
-                    <div>
-                        <h4>class 4</h4>
-                    </div>
-                </div><div class="playlist-item">
-                    <img src="./module-3_files/thumb.png" alt="class 5">
-                    <div>
-                        <h4>class 5</h4>
-                    </div>
-                </div></div>
+        </div>
     </div>
 
-    <script src="./module-3_files/player.js.download"></script>
+    <script src="https://player.vimeo.com/api/player.js"></script>
     <script>
         const videos = [
             {
@@ -267,37 +244,37 @@
 
                             This course covers account creation, profile setup, video evaluation, earnings tracking, and converting your credits into real rewards.
     T                       o get started, visit the official website at www.swagbucks.com.`,
-                thumbnail: "../imgs/thumb.png"
+                thumbnail: "./module-3_files/thumb.png"
             },
             {
                 id: 1060527908,
                 title: "Class 1",
                 description: "Learn how to access the official website, register, and verify your email so you can start taking advantage of opportunities to earn income by watching videos.",
-                thumbnail: "../imgs/thumb.png"
+                thumbnail: "./module-3_files/thumb.png"
             },
             {
                 id: 1060528127,
                 title: "Class 2",
                 description: "Discover how to select and watch paid videos. Learn to provide clear and useful feedback to start collecting credits that convert into cash.",
-                thumbnail: "../imgs/thumb.png"
+                thumbnail: "./module-3_files/thumb.png"
             },
             {
                 id: 1060528068,
                 title: "class 3",
                 description: "Use the dashboard to monitor your credits and view your progress. Receive simple tips to improve your feedback and boost your earnings.",
-                thumbnail: "../imgs/thumb.png"
+                thumbnail: "./module-3_files/thumb.png"
             },
             {
                 id: 1060528015,
                 title: "class 4",
                 description: "Learn how to turn your credits into real rewards like gift cards or cash. Set financial goals and plan your future to make video watching a steady income source.",
-                thumbnail: "../imgs/thumb.png"
+                thumbnail: "./module-3_files/thumb.png"
             },
             {
                 id: 1060527960,
                 title: "class 5",
                 description: "Learn how to turn your credits into real rewards like gift cards or cash. Set financial goals and plan your future to make video watching a steady income source.",
-                thumbnail: "../imgs/thumb.png"
+                thumbnail: "./module-3_files/thumb.png"
             }
         ];
 
@@ -350,4 +327,6 @@
     </script>
 
 
-</body></html>
+</body>
+
+</html>
